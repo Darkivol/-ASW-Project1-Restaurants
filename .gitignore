@@ -1,0 +1,8 @@
+/bin/
+/build/
+/.gradle/
+/environments/developer/.vagrant
+/environments/shared/
+/.settings/
+.classpath
+.project
