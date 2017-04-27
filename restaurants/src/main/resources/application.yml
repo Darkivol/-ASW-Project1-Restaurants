@@ -1,0 +1,10 @@
+# application.yml 
+--- 
+spring: 
+  profiles: restaurants
+  application: 
+    name: restaurants
+city.uri: http://localhost:8081 
+rating.uri: http://localhost:8082 
+server:
+  port: 8080

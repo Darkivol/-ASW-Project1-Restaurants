@@ -1,29 +1,51 @@
-buildscript {
-	ext {
-		springBootVersion = '1.5.2.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+plugins {
+    id 'org.springframework.boot' version '1.5.3.RELEASE'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
-jar {
-	baseName = 'restaurants'
-	version = '0.0.1-SNAPSHOT'
-}
-
 sourceCompatibility = 1.8
+
+ext {
+	springBootVersion = '1.5.3.RELEASE'
+}
 
 repositories {
 	mavenCentral()
+}	
+
+task (restaurantsJar, type: Jar) {
+	from '/restaurants/src/main'
+ 	appendix = 'restaurants'
+    bootRepackage {
+    	mainClass = 'asw.project.restaurants.RestaurantApplication'
+	}
+	springBoot {
+	    backupSource = false
+	}
+	manifest {
+        attributes ('Main-Class': 'asw.project.restaurants.RestaurantApplication')
+    }
 }
+
+task (citiesJar, type: Jar) {
+	from 'cities'
+ 	appendix = 'cities'
+    bootRepackage {
+    	mainClass = 'asw.project.cities.CityRestaurantApplication'
+	}
+	springBoot {
+	    backupSource = false
+	}
+	manifest {
+        attributes ('Main-Class': 'asw.project.cities.CityRestaurantApplication')
+    }
+}
+
+jar.enabled = false
+bootRepackage.withJarTask = [restaurantsJar, citiesJar]
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
