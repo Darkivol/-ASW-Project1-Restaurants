@@ -6,3 +6,9 @@
 /.settings/
 .classpath
 .project
+/cities/.settings/
+/cities/.project
+/restaurants/.settings/
+/restaurants/.project
+/ratings/.settings/
+/ratings/.project
