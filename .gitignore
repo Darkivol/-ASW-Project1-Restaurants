@@ -8,7 +8,11 @@
 .project
 /cities/.settings/
 /cities/.project
+/cities/build/
 /restaurants/.settings/
 /restaurants/.project
+/restaurants/build/
 /ratings/.settings/
 /ratings/.project
+/ratings/build/
+/dist/
