@@ -3,7 +3,12 @@
 spring:
   application: 
     name: cities
-restaurants: Le tagliatelle di Nonna Pina, Casa del Kebab, Le Pizze di Pizzo, Abbondanza Lucana, Archetto, Don Carlos, RossoPomodoro, Da Michele
+cities:
+  restaurants:
+    affi: Le tagliatelle di Nonna Pina, Casa del Kebab
+    matera: Le Pizze di Pizzo, Abbondanza Lucana, Archetto
+    roma: Don Carlos
+    napoli: RossoPomodoro, Da Michele
 specialties: Margherita, Bomba pugliese, Shrek, Panino o piadina?
 server: 
   port: 8081

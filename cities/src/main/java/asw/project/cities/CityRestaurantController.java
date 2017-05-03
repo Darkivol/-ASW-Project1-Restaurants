@@ -2,33 +2,41 @@ package asw.project.cities;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@ConfigurationProperties(prefix = "cities")
 public class CityRestaurantController {
 	
-	@Value("${restaurants}")  
-	private String[] restaurants;
+	private Map<String, String> restaurants;
+
+	public Map<String, String> getRestaurants() {
+		return this.restaurants;
+	}
+
+	public void setRestaurants(Map<String, String> restaurants) {
+		this.restaurants = restaurants;
+	}
 	
-	@Value("${specialties}")  
+    @Value("${specialties}")  
 	private String[] specialties;
+    
+    @Value("${cities.restaurants.affi}")  
+	private String affiRest;
 	
 	private final Logger logger = Logger.getLogger("asw.project.cities"); 
 
 	
 	@RequestMapping("/S1/{city}")
 	public String[] ristoranti(@PathVariable String city){
-		Random rand = new Random();
-		String[] result = {restaurants[rand.nextInt(restaurants.length)], 
-							restaurants[rand.nextInt(restaurants.length)],
-							restaurants[rand.nextInt(restaurants.length)]};
+		String[] result = (restaurants.get(city) == null) ? null : restaurants.get(city).split(",");
 		return result;
 	}
 	

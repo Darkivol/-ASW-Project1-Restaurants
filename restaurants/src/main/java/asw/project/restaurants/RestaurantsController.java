@@ -35,6 +35,13 @@ public class RestaurantsController {
 		
 		Map<String, Map<String, String>> restaurants2ratings = new HashMap<>();
 		
+		if (cityRestaurants==null) {
+			Map<String, String> result = new HashMap<>();
+			result.put("Non vi sono ristoranti in questa citta'", "");
+			restaurants2ratings.put("", result);
+			return restaurants2ratings;
+		}
+		
 		for(String restaurant : cityRestaurants) {
 			double rating = this.getRating(city, restaurant);
 			Map<String, String> result = new HashMap<>();
