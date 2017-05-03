@@ -27,9 +27,6 @@ public class CityRestaurantController {
 	
     @Value("${specialties}")  
 	private String[] specialties;
-    
-    @Value("${cities.restaurants.affi}")  
-	private String affiRest;
 	
 	private final Logger logger = Logger.getLogger("asw.project.cities"); 
 
