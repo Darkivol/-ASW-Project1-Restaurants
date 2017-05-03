@@ -1,7 +1,6 @@
 # application.yml 
 --- 
-spring: 
-  profiles: restaurants
+spring:
   application: 
     name: restaurants
 city.uri: http://localhost:8081 

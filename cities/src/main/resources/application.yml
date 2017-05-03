@@ -1,20 +1,9 @@
 # application.yml 
 --- 
-spring: 
-  profiles: cities
+spring:
   application: 
     name: cities
-restaurants:
-  affi:
-    - Le Pizze di Pizzo
-  matera:
-    - Abbondanza Lucana
-    - Le tagliatelle di Nonna Pina
-    - Casa del Kebab
-specialties:
-  - Margherita
-  - Bomba pugliese
-  - Shrek
-  - Panino o piadina?
+restaurants: Le tagliatelle di Nonna Pina, Casa del Kebab, Le Pizze di Pizzo, Abbondanza Lucana, Archetto, Don Carlos, RossoPomodoro, Da Michele
+specialties: Margherita, Bomba pugliese, Shrek, Panino o piadina?
 server: 
   port: 8081

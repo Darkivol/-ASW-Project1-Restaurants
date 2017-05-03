@@ -9,10 +9,13 @@
 /cities/.settings/
 /cities/.project
 /cities/build/
+/cities/bin/
 /restaurants/.settings/
 /restaurants/.project
 /restaurants/build/
+/restaurants/bin/
 /ratings/.settings/
 /ratings/.project
 /ratings/build/
+/ratings/bin/
 /dist/

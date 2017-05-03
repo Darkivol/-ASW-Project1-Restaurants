@@ -1,7 +1,6 @@
 # application.yml 
 --- 
-spring: 
-  profiles: ratings
+spring:
   application: 
     name: ratings
 server: 

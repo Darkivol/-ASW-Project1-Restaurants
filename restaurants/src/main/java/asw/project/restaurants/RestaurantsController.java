@@ -3,15 +3,17 @@ package asw.project.restaurants;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate; 
 
-@RestController
+@Controller
 public class RestaurantsController {
 
 	private final Logger logger = Logger.getLogger("asw.project.restaurants"); 
@@ -21,16 +23,19 @@ public class RestaurantsController {
 
 	@Value("${rating.uri}") 
 	private String ratingUri;
-
+	
 	@RequestMapping("/{city}")
-	public Map<String, Double> getRestaurantsByCity(@PathVariable String city) {
-		ArrayList<String> cityRestaurants = (ArrayList<String>) this.getCityRestaurants(cityUri.concat('/' + city));
+	public @ResponseBody Map<String, Map<String, String>> getRestaurantsByCity(@PathVariable String city) {
+		ArrayList<String> cityRestaurants = this.getCityRestaurants(city);
 		
-		Map<String, Double> restaurants2ratings = new HashMap<>();
+		Map<String, Map<String, String>> restaurants2ratings = new HashMap<>();
 		
 		for(String restaurant : cityRestaurants) {
-			double rating = this.getRating(ratingUri.concat('/' + city + '/' + restaurant));
-			restaurants2ratings.put(restaurant, rating);
+			double rating = this.getRating(city, restaurant);
+			Map<String, String> result = new HashMap<>();
+			result.put("rating", String.valueOf(rating));
+			result.put("name", restaurant);
+			restaurants2ratings.put(UUID.randomUUID().toString(), result);
 		}
 		
 		logger.info("getRestaurantsByCity(): " + restaurants2ratings);
@@ -38,18 +43,28 @@ public class RestaurantsController {
 	}
 	
 	@RequestMapping("/{city}/{restaurant}")
-	public String[] getRestaurantInfo(@PathVariable String city, @PathVariable String restaurant) {
-		String specialty = (String) this.getCityRestaurants(cityUri.concat('/' + city + '/' + restaurant));
-		double rating = this.getRating(ratingUri.concat('/' + city + '/' + restaurant));
-		return new String[]{specialty, String.valueOf(rating)}; 
+	public @ResponseBody Map<String, String> getRestaurantInfo(@PathVariable String city, @PathVariable String restaurant) {
+		ArrayList<String> specialty = this.getSpecialty(city, restaurant);
+		double rating = this.getRating(city, restaurant);
+		
+		Map<String, String> result = new HashMap<>();
+		result.put("specialty", specialty.get(0));
+		result.put("rating", String.valueOf(rating));
+		return result;
 	}
 	
-	private Object getCityRestaurants(String uri) {
-		return new RestTemplate().getForObject(uri, Object.class);
+	private ArrayList<String> getCityRestaurants(String city) {
+		String uri = cityUri.concat('/' + city);
+		return new RestTemplate().getForObject(uri, ArrayList.class);
 	}
 	
-	private double getRating(String uri) {
+	private ArrayList<String> getSpecialty(String city, String restaurant) {
+		String uri = cityUri.concat('/' + city + '/' + restaurant);
+		return new RestTemplate().getForObject(uri, ArrayList.class);
+	}
+	
+	private double getRating(String city, String restaurant) {
+		String uri = ratingUri.concat('/' + city + '/' + restaurant);
 		return new RestTemplate().getForObject(uri,Double.class);
 	}
-	
 }
