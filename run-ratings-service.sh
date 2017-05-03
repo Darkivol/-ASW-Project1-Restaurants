@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script per avviare il servizio S
+# Script per avviare il servizio S2
 
-echo Running Restaurants Service S
+echo Running Ratings Service S2
 
-java -Xms64m -Xmx128m -jar -Dspring.profiles.active=ratings dist/ratings-0.0.1-SNAPSHOT.jar
+java -Xms64m -Xmx128m -jar dist/ratings-0.0.1-SNAPSHOT.jar

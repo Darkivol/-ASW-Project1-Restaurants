@@ -23,8 +23,8 @@ public class CityRestaurantController {
 	private final Logger logger = Logger.getLogger("asw.project.cities"); 
 
 	
-	@RequestMapping("/{city}")
-	public @ResponseBody String[] ristoranti(@PathVariable String city){
+	@RequestMapping("/S1/{city}")
+	public String[] ristoranti(@PathVariable String city){
 		Random rand = new Random();
 		String[] result = {restaurants[rand.nextInt(restaurants.length)], 
 							restaurants[rand.nextInt(restaurants.length)],
@@ -32,8 +32,8 @@ public class CityRestaurantController {
 		return result;
 	}
 	
-	@RequestMapping("/{city}/{restaurant}")
-	public @ResponseBody List<String> getRestaurantSpecialty(@PathVariable String city, @PathVariable String restaurant) {
+	@RequestMapping("/S1/{city}/{restaurant}")
+	public List<String> getRestaurantSpecialty(@PathVariable String city, @PathVariable String restaurant) {
 		return Arrays.asList(
 				this.specialties[(int) (Math.round(Math.random()*(this.specialties.length - 1)))]
 			   ); 

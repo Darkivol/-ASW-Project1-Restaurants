@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script per avviare il servizio S
+# Script per avviare il servizio S1
 
-echo Running Restaurants Service S
+echo Running City Restaurants Service S1
 
-java -Xms64m -Xmx128m -jar -Dspring.profiles.active=cities dist/cities-0.0.1-SNAPSHOT.jar
+java -Xms64m -Xmx128m -jar dist/cities-0.0.1-SNAPSHOT.jar

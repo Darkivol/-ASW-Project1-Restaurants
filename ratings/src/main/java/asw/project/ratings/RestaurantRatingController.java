@@ -12,8 +12,8 @@ public class RestaurantRatingController {
 	
 	private final Logger logger = Logger.getLogger("asw.project.ratings"); 
 
-	@RequestMapping("/{city}/{restaurant}")
-	public @ResponseBody double getRestaurantRating(@PathVariable String city, @PathVariable String restaurant) {
+	@RequestMapping("/S2/{city}/{restaurant}")
+	public double getRestaurantRating(@PathVariable String city, @PathVariable String restaurant) {
 		return Math.floor((Math.random() * 5) * 10) / 10; 
 	}
 }

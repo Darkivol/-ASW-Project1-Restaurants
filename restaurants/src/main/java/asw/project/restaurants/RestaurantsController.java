@@ -24,7 +24,12 @@ public class RestaurantsController {
 	@Value("${rating.uri}") 
 	private String ratingUri;
 	
-	@RequestMapping("/{city}")
+	@RequestMapping("/")
+	public String getIndex() {
+		return "index";
+	}
+	
+	@RequestMapping("/S/{city}")
 	public @ResponseBody Map<String, Map<String, String>> getRestaurantsByCity(@PathVariable String city) {
 		ArrayList<String> cityRestaurants = this.getCityRestaurants(city);
 		
@@ -42,7 +47,7 @@ public class RestaurantsController {
 		return restaurants2ratings; 
 	}
 	
-	@RequestMapping("/{city}/{restaurant}")
+	@RequestMapping("/S/{city}/{restaurant}")
 	public @ResponseBody Map<String, String> getRestaurantInfo(@PathVariable String city, @PathVariable String restaurant) {
 		ArrayList<String> specialty = this.getSpecialty(city, restaurant);
 		double rating = this.getRating(city, restaurant);

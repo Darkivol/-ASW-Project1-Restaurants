@@ -4,4 +4,4 @@
 
 echo Running Restaurants Service S
 
-java -Xms64m -Xmx128m -jar -Dspring.profiles.active=restaurants dist/restaurants-0.0.1-SNAPSHOT.jar
+java -Xms64m -Xmx128m -jar dist/restaurants-0.0.1-SNAPSHOT.jar
