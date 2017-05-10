@@ -5,10 +5,28 @@ spring:
     name: cities
 cities:
   restaurants:
-    affi: Le tagliatelle di Nonna Pina, Casa del Kebab
-    matera: Le Pizze di Pizzo, Abbondanza Lucana, Archetto
-    roma: Don Carlos
-    napoli: RossoPomodoro, Da Michele
-specialties: Margherita, Bomba pugliese, Shrek, Panino o piadina?
+    affi: 
+        - Le tagliatelle di Nonna Pina
+        - Casa del Kebab
+    matera: 
+        - Le Pizze di Pizzo
+        - Abbondanza Lucana
+        - Archetto
+    roma: 
+        - Don Carlos
+    napoli: 
+        - RossoPomodoro
+        - Da Michele
+  specialties: 
+        - Margherita
+        - Marinara
+        - Salsiccia e Friarielli
+        - Panino farcito
+        - Spaghetti alle vongole
+        - Risotto allo zenzero
+        - Quattro Stagioni
+        - Lasagna al forno
+        - Spigola al forno
+        - Tagliata di bovino
 server: 
   port: 8081

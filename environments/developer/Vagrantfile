@@ -2,14 +2,14 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "ubuntu/trusty64"
-    config.vm.synced_folder "../../", "/home/vagrant/projects", :mount_options => ["dmode=777", "fmode=777"]
+    config.vm.synced_folder "../../", "/home/vagrant/restaurants", :mount_options => ["dmode=777", "fmode=777"]
     config.vm.synced_folder "../shared/", "/home/vagrant/shared", :mount_options => ["dmode=777", "fmode=777"]
 
     config.vm.define "dev" do |node|
         node.vm.hostname = "dev"    
 	
 	#Usiamo come IP della VM uno "abbastanza" poco usato
-        node.vm.network "private_network", ip: "127.0.0.2", virtualbox__intnet: true
+        node.vm.network "private_network", ip: "127.0.0.1", virtualbox__intnet: true
 
         node.vm.provider "virtualbox" do |v| 
 	    v.memory = 4096 
