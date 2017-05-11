@@ -6,10 +6,10 @@ spring:
 cities:
   restaurants:
     affi: 
+        - Le Pizze di Pizzo
         - Le tagliatelle di Nonna Pina
         - Casa del Kebab
-    matera: 
-        - Le Pizze di Pizzo
+    matera:
         - Abbondanza Lucana
         - Archetto
     roma: 
