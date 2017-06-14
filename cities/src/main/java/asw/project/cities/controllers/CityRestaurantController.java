@@ -24,7 +24,7 @@ public class CityRestaurantController {
 	/* Recupera i ristoranti di una determinata citta' dalla mappa e li ritorna all'oggetto chiamante.
 	 * Il risultato e' un array codificato in JSON.
 	 */
-	@RequestMapping("/S1/{city}")
+	@RequestMapping("/{city}")
 	public List<String> getRestaurantsByCity(@PathVariable String city) {
 		List<String> restaurantsByCity = restaurants.get(city);
 		logger.info("S1 getRestaurantsByCity(" + city + "): " + restaurantsByCity);
@@ -35,7 +35,7 @@ public class CityRestaurantController {
 	 * Recupera casualmente una specialita' di un ristorante che si trova in una citta' e la ritorna all'oggetto chiamante.
 	 * Il risultato e' una stringa.
 	 */
-	@RequestMapping("/S1/{city}/{restaurant}")
+	@RequestMapping("/{city}/{restaurant}")
 	public String getRestaurantSpecialty(@PathVariable String city, @PathVariable String restaurant) {
 		Collections.shuffle(specialties);
 		String specialty = specialties.get(0);

@@ -6,25 +6,23 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate; 
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import asw.project.restaurants.service.CityService;
+import asw.project.restaurants.service.RatingService; 
+
+@RestController
 public class RestaurantsController {
 
 	private final Logger logger = Logger.getLogger("asw.project.restaurants"); 
-
-	/* URI del servizio S1, injectato da Spring sulla base del file YAML */
-	@Value("${city.uri}") 
-	private String cityUri;
-
-	/* URI del servizio S2, injectato da Spring sulla base del file YAML */
-	@Value("${rating.uri}") 
-	private String ratingUri;
+	
+	@Autowired private CityService cityService;
+	
+	@Autowired private RatingService ratingService;
 	
 	@RequestMapping("/")
 	public String getIndex() {
@@ -37,9 +35,9 @@ public class RestaurantsController {
 	 * l'indicazione sul valore (ad esempio "name", "rating") ed il valore associato.
 	 * Questa mappa viene convertita in un oggetto JSON dal controller grazie all'annotazione ResponseBody.
 	 */
-	@RequestMapping("/S/{city}")
+	@RequestMapping("/{city}")
 	public @ResponseBody Map<String, Map<String, String>> getRestaurantsByCity(@PathVariable String city) {
-		ArrayList<String> cityRestaurants = this.getCityRestaurants(city);
+		ArrayList<String> cityRestaurants = cityService.getCityRestaurants(city);
 		
 		Map<String, Map<String, String>> restaurants2ratings = new HashMap<>();
 		
@@ -47,7 +45,7 @@ public class RestaurantsController {
 			return new HashMap<>();
 		
 		for(String restaurant : cityRestaurants) {
-			double rating = this.getRating(city, restaurant);
+			double rating = ratingService.getRating(city, restaurant);
 
 			Map<String, String> result = new HashMap<>();
 			result.put("rating", String.format("%.2f", rating));
@@ -66,10 +64,10 @@ public class RestaurantsController {
 	 * in cui la chiave e' l'indicazione sul valore (ad esempio "specialty", "rating") ed il valore e' il dato associato.
 	 * Questa mappa viene convertita in un oggetto JSON dal controller grazie all'annotazione ResponseBody.
 	 */
-	@RequestMapping("/S/{city}/{restaurant}")
+	@RequestMapping("/{city}/{restaurant}")
 	public @ResponseBody Map<String, String> getRestaurantInfo(@PathVariable String city, @PathVariable String restaurant) {
-		String specialty = this.getSpecialty(city, restaurant);
-		double rating = this.getRating(city, restaurant);
+		String specialty = cityService.getSpecialty(city, restaurant);
+		double rating = ratingService.getRating(city, restaurant);
 		
 		Map<String, String> result = new HashMap<>();
 		result.put("specialty", specialty);
@@ -83,16 +81,16 @@ public class RestaurantsController {
 	/* Questi metodi effettuano chiamate REST ai servizi S1 ed S2, specificando di volta in volta
 	 * i parametri necessari.
 	 */
-	@SuppressWarnings("unchecked")
-	private ArrayList<String> getCityRestaurants(String city) {
-		return new RestTemplate().getForObject(cityUri, ArrayList.class, city, null);
-	}
-	
-	private String getSpecialty(String city, String restaurant) {
-		return new RestTemplate().getForObject(cityUri, String.class, city, restaurant);
-	}
-	
-	private double getRating(String city, String restaurant) {
-		return new RestTemplate().getForObject(ratingUri,Double.class, city, restaurant);
-	}
+//	@SuppressWarnings("unchecked")
+//	private ArrayList<String> getCityRestaurants(String city) {
+//		return new RestTemplate().getForObject(cityUri, ArrayList.class, city, null);
+//	}
+//	
+//	private String getSpecialty(String city, String restaurant) {
+//		return new RestTemplate().getForObject(cityUri, String.class, city, restaurant);
+//	}
+//	
+//	private double getRating(String city, String restaurant) {
+//		return new RestTemplate().getForObject(ratingUri,Double.class, city, restaurant);
+//	}
 }

@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  eureka:
+    image: swarm.inf.uniroma3.it:5000/servizio‐9009/eureka-img
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    
+  cities:
+    image: swarm.inf.uniroma3.it:5000/servizio‐9009/cities-img
+    depends_on: 
+      - "eureka"
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  ratings:
+    image: swarm.inf.uniroma3.it:5000/servizio‐9009/ratings-img
+    depends_on: 
+      - "eureka"
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  restaurants:
+    image: swarm.inf.uniroma3.it:5000/servizio‐9009/restaurants-img
+    depends_on: 
+      - "eureka"
+    deploy:
+      mode: replicated
+      replicas: 2
+
+  zuul:
+    image: swarm.inf.uniroma3.it:5000/servizio‐9009/zuul-img
+    depends_on: 
+      - "eureka"
+    ports:
+      - "9009:8080"

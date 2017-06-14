@@ -14,7 +14,7 @@ public class RestaurantRatingController {
 	/* Calcola casualmente una valutazione tra 0 e 5 di un ristorante che si trova in una citta' e lo ritorna all'oggetto chiamante.
 	 * Il risultato e' un numero decimale (che viene pero' incapsulato in un oggetto JSON).
 	 */
-	@RequestMapping("/S2/{city}/{restaurant}")
+	@RequestMapping("/{city}/{restaurant}")
 	public double getRestaurantRating(@PathVariable String city, @PathVariable String restaurant) {
 		double rating = (Math.random() * 5);
 		logger.info("S2 getRestaurantRating(" + city + ", " + restaurant + "): " + rating);

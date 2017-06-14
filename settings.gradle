@@ -1,2 +1,2 @@
 
-include "cities", "ratings", "restaurants"
+include "cities", "ratings", "restaurants", "eureka", "zuul"
