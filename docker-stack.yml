@@ -2,13 +2,13 @@ version: '3'
 
 services:
   eureka:
-    image: swarm.inf.uniroma3.it:5000/servizio‐9009/eureka-img
+    image: swarm.inf.uniroma3.it:5000/servizio-9009/eureka
     deploy:
       placement:
         constraints: [node.role == manager]
     
   cities:
-    image: swarm.inf.uniroma3.it:5000/servizio‐9009/cities-img
+    image: swarm.inf.uniroma3.it:5000/servizio-9009/cities
     depends_on: 
       - "eureka"
     deploy:
@@ -16,7 +16,7 @@ services:
       replicas: 1
 
   ratings:
-    image: swarm.inf.uniroma3.it:5000/servizio‐9009/ratings-img
+    image: swarm.inf.uniroma3.it:5000/servizio-9009/ratings
     depends_on: 
       - "eureka"
     deploy:
@@ -24,7 +24,7 @@ services:
       replicas: 1
 
   restaurants:
-    image: swarm.inf.uniroma3.it:5000/servizio‐9009/restaurants-img
+    image: swarm.inf.uniroma3.it:5000/servizio-9009/restaurants
     depends_on: 
       - "eureka"
     deploy:
@@ -32,7 +32,7 @@ services:
       replicas: 2
 
   zuul:
-    image: swarm.inf.uniroma3.it:5000/servizio‐9009/zuul-img
+    image: swarm.inf.uniroma3.it:5000/servizio-9009/zuul
     depends_on: 
       - "eureka"
     ports:
