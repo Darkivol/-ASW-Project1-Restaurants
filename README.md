@@ -12,18 +12,19 @@ Le istruzioni presentate prevedono l'avvio dell'applicazione su SO Linux tramite
 **Esecuzione in locale:**
 - Accedere alla `root` del progetto tramite terminale
 - Digitare ```./build.sh``` per l'esecuzione dello script atto all'operazione di build del progetto tramite Gradle
-- Terminata la fase di building, eseguire il comando ```./run-all.sh``` se si desidera avviare i servizi contemporaneamente. Alternativamente è possibile avviarli in maniera singola attraverso l'esecuzione dei singoli script presenti nella cartella
-- Al termine dell'avvio è quindi possibile accedere all'indirizzo ```localhost:8080/``` tramite un browser web per visualizzare la pagina di index
+- Terminata la fase di building, eseguire i comandi ```./build-all-images.sh```, ```./push-all-images.sh``` e ```./start-restaurants-stack.sh``` per buildare, pushare ed avviare lo stack Docker sul server swarm.inf.uniroma3.it (questo richiede di essere connessi alla rete universitaria con Docker configurato opportunamente)
+- Al termine degli script sopra citati è quindi possibile accedere all'indirizzo ```swarm.inf.uniroma3.it:9009/restaurants``` tramite un browser web per visualizzare la pagina di index (questo richiede di essere connessi alla rete universitaria)
 
 
 **Esecuzione tramite Vagrant:**
-- Accedere alla `root` del progetto e, tramite terminale, accedere ad ```environments/developer```
-- Digitare ```vagrant up``` nel terminale per l'avvio della macchina virtuale Vagrant (le impostazioni prevedono una virtualizazione di una macchina su 4GB di RAM e 2 Core, in caso si preferiscano altre impostazioni modificare tali dettagli)
-- Al termine dell'esecuzione della configurazione della macchina virtuale, digitare il comando ```vagrant ssh dev``` per accedere alla macchina virtuale tramite SSH
+- Accedere alla `root` del progetto e, tramite terminale, accedere ad ```environments```
+- Copiare tutti i certificati in una nuova cartella ```certs```
+- Digitare successivamente ```cd docker``` e ```vagrant up``` nel terminale per l'avvio della macchina virtuale Vagrant (le impostazioni prevedono una virtualizazione di una macchina su 4GB di RAM e 2 Core, in caso si preferiscano altre impostazioni modificare tali dettagli)
+- Al termine dell'esecuzione della configurazione della macchina virtuale, digitare il comando ```vagrant ssh docker``` per accedere alla macchina virtuale tramite SSH
 - Effettuato l'accesso alla macchina, digitare ```cd restaurants``` per accedere alla directory contenente il progetto
-- Digitare quindi ```./build.sh``` per l'esecuzione dello script atto all'operazione di build del progetto tramite Gradle
-- Terminata la fase di building, eseguire il comando ```./run-all.sh``` se si desidera avviare i servizi contemporaneamente. Alternativamente è possibile avviarli in maniera singola attraverso l'esecuzione dei singoli script presenti nella cartella
-- Al termine dell'avvio è quindi possibile accedere all'indirizzo ```localhost:8088/``` tramite un browser web per visualizzare la pagina di index
+- Digitare ```./build.sh``` per l'esecuzione dello script atto all'operazione di build del progetto tramite Gradle
+- Terminata la fase di building, eseguire i comandi ```./build-all-images.sh```, ```./push-all-images.sh``` e ```./start-restaurants-stack.sh``` per buildare, pushare ed avviare lo stack Docker sul server swarm.inf.uniroma3.it (questo richiede di essere connessi alla rete universitaria con Docker configurato opportunamente)
+- Al termine degli script sopra citati è quindi possibile accedere all'indirizzo ```swarm.inf.uniroma3.it:9009/restaurants``` tramite un browser web per visualizzare la pagina di index (questo richiede di essere connessi alla rete universitaria)
 
 ## Descrizione del dominio applicativo
 
