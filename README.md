@@ -1,4 +1,4 @@
-# ASW Progetto 1 - Ristoranti
+# ASW Progetto - Ristoranti (Parte 2)
 
 - Fabrizio Cicala (450977)
 - Luigi D’Onofrio (462576)
