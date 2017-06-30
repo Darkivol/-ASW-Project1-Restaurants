@@ -1,0 +1,37 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "ubuntu/trusty64"
+    config.vm.synced_folder "../../", "/home/vagrant/restaurants", :mount_options => ["dmode=777", "fmode=777"]
+    config.vm.synced_folder "../shared/", "/home/vagrant/shared", :mount_options => ["dmode=777", "fmode=777"]
+    config.vm.synced_folder "../cert/", "/home/vagrant/cert", :mount_options => ["dmode=777", "fmode=777"]
+
+
+    config.vm.define "docker" do |node|
+        node.vm.hostname = "docker"    
+	
+	#Usiamo come IP della VM uno "abbastanza" poco usato
+        node.vm.network "private_network", ip: "127.0.0.1", virtualbox__intnet: true
+
+        node.vm.provider "virtualbox" do |v| 
+	    v.memory = 4096 
+            v.cpus = 2
+        end 
+
+        node.vm.network "forwarded_port", guest: 22, host: 2222, id: 'ssh', auto_correct: true 
+        node.ssh.forward_agent = true
+
+        node.vm.provision :shell, :inline => 'apt-get update'
+        node.vm.provision :shell, path: "../shared/scripts/setup-java.sh"
+        node.vm.provision :shell, path: "../shared/scripts/setup-gradle.sh"
+        node.vm.provision :shell, path: "../shared/scripts/setup-maven.sh"
+	node.vm.provision :shell, path: "../shared/scripts/setup-docker.sh"
+        node.vm.provision :shell, path: "../shared/scripts/setup-docker-compose.sh"
+        node.vm.provision :shell, path: "../shared/scripts/setup-swarm-client.sh"
+  
+        node.vm.provision :shell, 
+            inline: "echo  'configurazione nodo docker completata'"
+
+    end
+
+end

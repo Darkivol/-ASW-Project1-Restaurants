@@ -2,6 +2,8 @@
 /build/
 /.gradle/
 /environments/developer/.vagrant
+/environments/docker/.vagrant
+/environments/cert/
 /environments/shared/
 /.settings/
 .classpath
